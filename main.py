@@ -816,7 +816,8 @@ if __name__ == "__main__":
             except ImportError:
                 import pdb as debugger
             debugger.post_mortem()
-        raise
+        # NA: wtf?
+        # raise
     finally:
         # move newly created debug project to debug_runs
         if opt.debug and not opt.resume and trainer.global_rank == 0:
