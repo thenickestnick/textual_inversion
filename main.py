@@ -139,36 +139,36 @@ def get_parser(**parser_kwargs):
     )
 
     parser.add_argument(
-        "--datadir_in_name", 
-        type=str2bool, 
-        nargs="?", 
-        const=True, 
-        default=True, 
+        "--datadir_in_name",
+        type=str2bool,
+        nargs="?",
+        const=True,
+        default=True,
         help="Prepend the final directory in the data_root to the output directory name")
 
-    parser.add_argument("--actual_resume", 
+    parser.add_argument("--actual_resume",
         type=str,
         required=True,
         help="Path to model to actually resume from")
 
-    parser.add_argument("--data_root", 
-        type=str, 
-        required=True, 
+    parser.add_argument("--data_root",
+        type=str,
+        required=True,
         help="Path to directory with training images")
 
-    parser.add_argument("--embedding_manager_ckpt", 
-        type=str, 
-        default="", 
+    parser.add_argument("--embedding_manager_ckpt",
+        type=str,
+        default="",
         help="Initialize embedding manager from a checkpoint")
 
-    parser.add_argument("--placeholder_tokens", 
-        type=str, 
-        nargs="+", 
+    parser.add_argument("--placeholder_tokens",
+        type=str,
+        nargs="+",
         default=["*"],
         help="Placeholder token which will be used to denote the concept in future prompts")
 
-    parser.add_argument("--init_word", 
-        type=str, 
+    parser.add_argument("--init_word",
+        type=str,
         help="Word to use as source for initial token embedding")
 
     return parser
@@ -571,7 +571,7 @@ if __name__ == "__main__":
 
         if opt.datadir_in_name:
             now = os.path.basename(os.path.normpath(opt.data_root)) + now
-            
+
         nowname = now + name + opt.postfix
         logdir = os.path.join(opt.logdir, nowname)
 
@@ -806,9 +806,10 @@ if __name__ == "__main__":
             except Exception:
                 melk()
                 raise
-        if not opt.no_test and not trainer.interrupted:
-            trainer.test(model, data)
-    except Exception:
+        # NA: Disable testing for now while we experiment.
+        #if not opt.no_test and not trainer.interrupted:
+        #    trainer.test(model, data)
+        #     except Exception:
         if opt.debug and trainer.global_rank == 0:
             try:
                 import pudb as debugger
