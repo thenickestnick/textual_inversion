@@ -1,3 +1,5 @@
+torchtext==0.11.2
+torchvision==0.11.3
 albumentations==1.1.0
 opencv-python==4.2.0.34
 pudb==2019.2
